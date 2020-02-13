@@ -1,9 +1,9 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const User = require('../models/users');
+const User = require('../models/Users');
 const router = express.Router();
-const auth = require('../auth');
+const auth = require('./auth');
 
 router.post('/signup', (req, res, next) => {
     let password = req.body.password;
@@ -14,11 +14,13 @@ router.post('/signup', (req, res, next) => {
 		return next(err);
         }
         User.create({
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            username: req.body.username,
+            fullname: req.body.fullname,
+            phonenumber: req.body.phonenumber,
+            username  : req.body.username,
             password: hash,
             conpassword: hash,
+            address: req.body.address,
+            citizenshipno: req.body.citizenshipno,
             image: req.body.image
         }).then((user) => {
             let token = jwt.sign({ _id: user._id }, process.env.SECRET);
@@ -59,5 +61,14 @@ router.put('/me', auth.verifyUser, (req, res, next) => {
             res.json({ _id: user._id, firstName: req.user.firstName, lastName: req.user.lastName, username: user.username, image: user.image });
         }).catch(next);
 });
+router.put('/update/id',function(req,res){
+    User.findOneAndUpdate({_id :req.params.id},req.body).then(function(){
+        res.send("updated")
+    }).catch(function(e){
+        res.send(e)
+  
+       
+    })
+})
 
 module.exports = router;

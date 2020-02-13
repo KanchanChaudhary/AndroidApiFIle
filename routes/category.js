@@ -1,13 +1,12 @@
 const express = require('express');
 const Category = require('../models/category');
-const auth = require('../auth');
-
+const auth=require('./auth');
 const router = express.Router();
 
 router.route('/')
     .get((req, res, next) => {
         Category.find({})
-            .then((categories) => {
+            .then((categories) => {//const auth = require('../auth');
                 res.json(categories);
             })
             .catch(next);

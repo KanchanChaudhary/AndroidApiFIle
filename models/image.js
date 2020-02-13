@@ -12,7 +12,7 @@ const imageSchema = new mongoose.Schema({
         required: true
     },
     done: {
-        type: Boolean,
+        type: String,
         default: false
     },
     image: [imageSchema],
