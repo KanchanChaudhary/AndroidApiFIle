@@ -9,11 +9,7 @@ const voteSchema = new mongoose.Schema({
         required: true
     },
     
-    candidateId: {
-        type: String,
-        required: true
-    },
-    image: {
+    image:{
         type:String,
         required:true
     }

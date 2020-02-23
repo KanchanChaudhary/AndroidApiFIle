@@ -13,14 +13,12 @@ const resultSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    image: {
-        type:String,
-        required:true
-    },
-    result: {
-        type:String,
-        required:true
+    image:{
+        type: String,
+        required: true
     }
+  
+   
 });
 
 module.exports = mongoose.model('result', resultSchema);
